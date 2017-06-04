@@ -115,7 +115,7 @@ QtObject {
             });
         }
 
-        var readySend = active && webSocket.status === WebSocket.Connecting;
+        var readySend = active && webSocket.status === WebSocket.Open;
 
         var nil = readySend ? subAll()
                             : afterSubAll();

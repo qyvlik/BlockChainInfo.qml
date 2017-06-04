@@ -57,15 +57,10 @@ Item {
             if (listModel.count > 20) {
                 listModel.remove(20);
             }
-
         }
 
         onBlock: {
             console.info(blockObj.hash);
-        }
-
-        onMessage: {
-            console.info(operation, messageObj);
         }
 
         onError: {
