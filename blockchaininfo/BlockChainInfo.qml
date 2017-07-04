@@ -69,7 +69,7 @@ QtObject {
         id: timer
         interval: 30000
         repeat: true
-        running: true
+        running: blockChainInfo.active
         onTriggered: {
             subscribing('ping');
         }
@@ -131,6 +131,32 @@ QtObject {
             callable.call({}, arguments);                   // {} mean thisArg
             singalObject.disconnect(arguments.callee);
         });
+    }
+
+
+    function setHeader(xhr, headers) {
+        //"Content-Type":"application/x-www-form-urlencoded"
+        for(var iter in headers) {
+            xhr.setRequestHeader(iter, headers[iter]);
+        }
+    }
+
+    function ajax(method, url, headers, data, callable) {
+        headers = headers || {};
+        callable = callable || function(xhr) {
+            console.log(xhr.responseText);
+        }
+        var xhr = new XMLHttpRequest;
+        xhr.onreadystatechange = function() {
+            callable(xhr);
+        };
+        xhr.open(method, url);
+        setHeader(xhr, headers);
+        if("GET" === method) {
+            xhr.send();
+        } else {
+            xhr.send(data);
+        }
     }
 
 }

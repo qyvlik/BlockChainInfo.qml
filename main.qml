@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import QtQuick.Window 2.2
 
+import blockchaininfo 1.0
+
 Item {
 
     width: 360 * dp
@@ -52,7 +54,7 @@ Item {
         onTransaction: {
             console.info("txid:", txObj.hash);
 
-            listModel.insert(0, {txid: txObj.hash})
+            listModel.insert(0, {txid: txObj.hash});
 
             if (listModel.count > 20) {
                 listModel.remove(20);
